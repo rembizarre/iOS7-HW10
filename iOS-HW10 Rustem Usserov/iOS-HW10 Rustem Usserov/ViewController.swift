@@ -10,6 +10,7 @@ import SnapKit
 
 class ViewController: UIViewController {
 
+    //MARK: - UIElements
     private let backgroundImage: UIImageView = {
         let backgroundImage = UIImageView()
         backgroundImage.image = UIImage(named: "background")
@@ -54,6 +55,26 @@ class ViewController: UIViewController {
         return dontHaveAccount
     }()
 
+    private let facebookButton: UIButton = {
+        var buttonConfig = UIButton.Configuration.filled()
+        buttonConfig.baseForegroundColor = .white
+        buttonConfig.baseBackgroundColor = UIColor(red: 52/255, green: 156/255, blue: 239/255, alpha: 1)
+        buttonConfig.image = UIImage(named: "fblogo")
+        buttonConfig.imagePadding = 10
+        buttonConfig.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer{ incoming in
+            var outgoing = incoming
+            outgoing.font = UIFont(name: "Blinker-Regular", size: 14)
+            return outgoing
+        }
+
+        let facebookButton = UIButton(configuration: buttonConfig, primaryAction: nil)
+        facebookButton.setTitle("Facebook", for: .normal)
+
+        facebookButton.layer.cornerRadius = 15
+        facebookButton.clipsToBounds = true
+        return facebookButton
+    }()
+//MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -62,7 +83,7 @@ class ViewController: UIViewController {
         setupEmailField()
         setupPasswordField()
     }
-
+//MARK: - Setup Views
     private func setupViews() {
         view.addSubview(loginLabel)
         view.addSubview(emailField)
@@ -75,13 +96,15 @@ class ViewController: UIViewController {
         view.addSubview(forgotPassword)
         view.addSubview(signUpButton)
         view.addSubview(dontHaveAccountLabel)
+        view.addSubview(facebookButton)
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         loginLabel.translatesAutoresizingMaskIntoConstraints = false
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
         dontHaveAccountLabel.translatesAutoresizingMaskIntoConstraints = false
+        facebookButton.translatesAutoresizingMaskIntoConstraints = false
     }
-
+//MARK: - Setup Constraints
     private func setupConstraints() {
         backgroundImage.snp.makeConstraints { make in
             make.height.equalToSuperview().multipliedBy(0.75)
@@ -130,6 +153,13 @@ class ViewController: UIViewController {
         signUpButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-44)
             make.leading.equalTo(dontHaveAccountLabel.snp.trailing).offset(10)
+        }
+
+        facebookButton.snp.makeConstraints { make in
+            make.bottom.equalTo(dontHaveAccountLabel.snp.top).offset(-30)
+            make.centerX.equalTo(dontHaveAccountLabel)
+            make.width.equalTo(120)
+            make.height.equalTo(30)
         }
     }
 

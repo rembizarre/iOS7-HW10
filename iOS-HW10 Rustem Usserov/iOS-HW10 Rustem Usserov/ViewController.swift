@@ -70,9 +70,29 @@ class ViewController: UIViewController {
         let facebookButton = UIButton(configuration: buttonConfig, primaryAction: nil)
         facebookButton.setTitle("Facebook", for: .normal)
 
-        facebookButton.layer.cornerRadius = 15
+        facebookButton.layer.cornerRadius = 17
         facebookButton.clipsToBounds = true
         return facebookButton
+    }()
+
+    private let twitterButton: UIButton = {
+        var buttonConfig = UIButton.Configuration.filled()
+        buttonConfig.baseForegroundColor = .white
+        buttonConfig.baseBackgroundColor = UIColor(red: 80/255, green: 115/255, blue: 181/255, alpha: 1)
+        buttonConfig.image = UIImage(named: "xlogo")
+        buttonConfig.imagePadding = 10
+        buttonConfig.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer{ incoming in
+            var outgoing = incoming
+            outgoing.font = UIFont(name: "Blinker-Regular", size: 14)
+            return outgoing
+        }
+
+        let twitterButton = UIButton(configuration: buttonConfig, primaryAction: nil)
+        twitterButton.setTitle("Twitter", for: .normal)
+
+        twitterButton.layer.cornerRadius = 17
+        twitterButton.clipsToBounds = true
+        return twitterButton
     }()
 //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -97,69 +117,78 @@ class ViewController: UIViewController {
         view.addSubview(signUpButton)
         view.addSubview(dontHaveAccountLabel)
         view.addSubview(facebookButton)
+        view.addSubview(twitterButton)
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         loginLabel.translatesAutoresizingMaskIntoConstraints = false
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
         dontHaveAccountLabel.translatesAutoresizingMaskIntoConstraints = false
         facebookButton.translatesAutoresizingMaskIntoConstraints = false
+        twitterButton.translatesAutoresizingMaskIntoConstraints = false
     }
 //MARK: - Setup Constraints
     private func setupConstraints() {
         backgroundImage.snp.makeConstraints { make in
-            make.height.equalToSuperview().multipliedBy(0.75)
+            make.height.equalToSuperview().multipliedBy(0.65)
         }
 
         secondBackgroundImage.snp.makeConstraints { make in
-            make.bottom.equalTo(backgroundImage.snp.bottom).offset(-16)
+            make.bottom.equalTo(backgroundImage.snp.bottom).offset(-8)
             make.width.equalToSuperview()
         }
         loginLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(170)
+            make.top.equalToSuperview().offset(130)
         }
 
         emailField.snp.makeConstraints { make in
             make.centerX.equalTo(loginLabel)
             make.top.equalTo(loginLabel.snp.bottom).offset(40)
-            make.width.equalToSuperview().multipliedBy(0.85)
+            make.width.equalToSuperview().multipliedBy(0.70)
             make.height.equalTo(55)
         }
 
         passwordField.snp.makeConstraints { make in
             make.centerX.equalTo(emailField)
             make.top.equalTo(emailField.snp.bottom).offset(20)
-            make.width.equalToSuperview().multipliedBy(0.85)
+            make.width.equalTo(emailField.snp.width)
             make.height.equalTo(55)
         }
 
         loginButton.snp.makeConstraints { make in
             make.centerX.equalTo(passwordField)
-            make.top.equalTo(passwordField.snp.bottom).offset(50)
-            make.width.equalToSuperview().multipliedBy(0.85)
+            make.top.equalTo(passwordField.snp.bottom).offset(40)
+            make.width.equalTo(emailField.snp.width)
             make.height.equalTo(50)
         }
 
         forgotPassword.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(30)
+            make.top.equalTo(loginButton.snp.bottom).offset(20)
             make.centerX.equalTo(loginButton)
         }
 
         dontHaveAccountLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(100)
-            make.bottom.equalToSuperview().offset(-50)
+            make.bottom.equalToSuperview().offset(-70)
         }
 
         signUpButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-44)
+            make.bottom.equalToSuperview().offset(-64)
             make.leading.equalTo(dontHaveAccountLabel.snp.trailing).offset(10)
         }
 
         facebookButton.snp.makeConstraints { make in
-            make.bottom.equalTo(dontHaveAccountLabel.snp.top).offset(-30)
-            make.centerX.equalTo(dontHaveAccountLabel)
-            make.width.equalTo(120)
-            make.height.equalTo(30)
+            make.bottom.equalTo(dontHaveAccountLabel.snp.top).offset(-40)
+            make.leading.equalToSuperview().offset(30)
+            make.height.equalTo(37)
+        }
+
+        twitterButton.snp.makeConstraints { make in
+            make.bottom.equalTo(facebookButton.snp.bottom)
+            make.leading.equalTo(facebookButton.snp.trailing).offset(20)
+            make.trailing.equalToSuperview().offset(-30)
+            make.width.equalTo(facebookButton.snp.width)
+            make.height.equalTo(facebookButton.snp.height)
         }
     }
 

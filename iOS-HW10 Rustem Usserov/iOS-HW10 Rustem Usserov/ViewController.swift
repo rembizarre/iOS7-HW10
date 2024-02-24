@@ -25,42 +25,20 @@ class ViewController: UIViewController {
         return secondBackground
     }()
 
-    private let loginLabel: UILabel = {
-        let loginLabel = UILabel()
-        loginLabel.text = "Login"
-        loginLabel.textColor = .white
-        loginLabel.font = UIFont(name: "Blinker-SemiBold", size: 24)
-        return loginLabel
-    }()
-
-    private let loginButton = CustomButton(title: "Login", hasBackground: true)
-    private let forgotPassword = CustomButton(title: "Forgot your password?", hasBackground: false)
-
+    private let loginLabel = CustomLabel(text: "Login", tittleType: .big)
     private let emailField = CustomTextField(fieldType: .email)
     private let passwordField = CustomTextField(fieldType: .password)
-
-    private let signUpButton: UIButton = {
-        let signUpButton = UIButton()
-        signUpButton.setTitle("Sign up", for: .normal)
-        signUpButton.setTitleColor(UIColor(red: 106/255, green: 116/255, blue: 207/255, alpha: 1), for: .normal)
-        signUpButton.titleLabel?.font = UIFont(name: "Blinker-Regular", size: 15)
-        return signUpButton
-    }()
-    
-    private let dontHaveAccountLabel: UILabel = {
-        let dontHaveAccount = UILabel()
-        dontHaveAccount.text = "Don't have account?"
-        dontHaveAccount.textColor = UIColor(red: 122/255, green: 122/255, blue: 122/255, alpha: 1)
-        dontHaveAccount.font = UIFont(name: "Blinker-SemiBold", size: 15)
-        return dontHaveAccount
-    }()
+    private let loginButton = CustomButton(title: "Login", hasBackground: true)
+    private let forgotPassword = CustomButton(title: "Forgot your password?", hasBackground: false)
+    private let connectWithLAbel = CustomLabel(text: "or connect with", tittleType: .small)
 
     private let facebookButton: UIButton = {
         var buttonConfig = UIButton.Configuration.filled()
         buttonConfig.baseForegroundColor = .white
         buttonConfig.baseBackgroundColor = UIColor(red: 52/255, green: 156/255, blue: 239/255, alpha: 1)
         buttonConfig.image = UIImage(named: "fblogo")
-        buttonConfig.imagePadding = 10
+        buttonConfig.imagePadding = 15
+        buttonConfig.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -10, bottom: 0, trailing: 10)
         buttonConfig.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer{ incoming in
             var outgoing = incoming
             outgoing.font = UIFont(name: "Blinker-Regular", size: 14)
@@ -80,7 +58,8 @@ class ViewController: UIViewController {
         buttonConfig.baseForegroundColor = .white
         buttonConfig.baseBackgroundColor = UIColor(red: 80/255, green: 115/255, blue: 181/255, alpha: 1)
         buttonConfig.image = UIImage(named: "xlogo")
-        buttonConfig.imagePadding = 10
+        buttonConfig.imagePadding = 20
+        buttonConfig.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -25, bottom: 0, trailing: 10)
         buttonConfig.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer{ incoming in
             var outgoing = incoming
             outgoing.font = UIFont(name: "Blinker-Regular", size: 14)
@@ -89,11 +68,33 @@ class ViewController: UIViewController {
 
         let twitterButton = UIButton(configuration: buttonConfig, primaryAction: nil)
         twitterButton.setTitle("Twitter", for: .normal)
-
-        twitterButton.layer.cornerRadius = 17
         twitterButton.clipsToBounds = true
+        twitterButton.layer.cornerRadius = 17
+        twitterButton.layer.shadowColor = UIColor.black.cgColor
+        twitterButton.layer.shadowOpacity = 0.3
+        twitterButton.layer.shadowOffset = .zero
+        twitterButton.layer.shadowRadius = 10
+        twitterButton.layer.shouldRasterize = true
+        twitterButton.layer.rasterizationScale = UIScreen.main.scale
         return twitterButton
     }()
+
+    private let signUpButton: UIButton = {
+        let signUpButton = UIButton()
+        signUpButton.setTitle("Sign up", for: .normal)
+        signUpButton.setTitleColor(UIColor(red: 106/255, green: 116/255, blue: 207/255, alpha: 1), for: .normal)
+        signUpButton.titleLabel?.font = UIFont(name: "Blinker-Regular", size: 15)
+        return signUpButton
+    }()
+
+    private let dontHaveAccountLabel: UILabel = {
+        let dontHaveAccount = UILabel()
+        dontHaveAccount.text = "Don't have account?"
+        dontHaveAccount.textColor = UIColor(red: 122/255, green: 122/255, blue: 122/255, alpha: 1)
+        dontHaveAccount.font = UIFont(name: "Blinker-SemiBold", size: 15)
+        return dontHaveAccount
+    }()
+
 //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,6 +119,7 @@ class ViewController: UIViewController {
         view.addSubview(dontHaveAccountLabel)
         view.addSubview(facebookButton)
         view.addSubview(twitterButton)
+        view.addSubview(connectWithLAbel)
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         loginLabel.translatesAutoresizingMaskIntoConstraints = false
         loginButton.translatesAutoresizingMaskIntoConstraints = false
@@ -125,15 +127,16 @@ class ViewController: UIViewController {
         dontHaveAccountLabel.translatesAutoresizingMaskIntoConstraints = false
         facebookButton.translatesAutoresizingMaskIntoConstraints = false
         twitterButton.translatesAutoresizingMaskIntoConstraints = false
+        connectWithLAbel.translatesAutoresizingMaskIntoConstraints = false
     }
 //MARK: - Setup Constraints
     private func setupConstraints() {
         backgroundImage.snp.makeConstraints { make in
-            make.height.equalToSuperview().multipliedBy(0.65)
+            make.height.equalToSuperview().multipliedBy(0.67)
         }
 
         secondBackgroundImage.snp.makeConstraints { make in
-            make.bottom.equalTo(backgroundImage.snp.bottom).offset(-8)
+            make.bottom.equalTo(backgroundImage.snp.bottom).offset(-10)
             make.width.equalToSuperview()
         }
         loginLabel.snp.makeConstraints { make in
@@ -159,7 +162,7 @@ class ViewController: UIViewController {
             make.centerX.equalTo(passwordField)
             make.top.equalTo(passwordField.snp.bottom).offset(40)
             make.width.equalTo(emailField.snp.width)
-            make.height.equalTo(50)
+            make.height.equalTo(40)
         }
 
         forgotPassword.snp.makeConstraints { make in
@@ -190,6 +193,12 @@ class ViewController: UIViewController {
             make.width.equalTo(facebookButton.snp.width)
             make.height.equalTo(facebookButton.snp.height)
         }
+
+        connectWithLAbel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(facebookButton.snp.top).offset(-20)
+        }
+
     }
 
     private func setupEmailField() {

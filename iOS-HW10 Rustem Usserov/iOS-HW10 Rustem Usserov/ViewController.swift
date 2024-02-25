@@ -10,6 +10,7 @@ import SnapKit
 
 class ViewController: UIViewController {
 
+    //MARK: - UIElements
     private let backgroundImage: UIImageView = {
         let backgroundImage = UIImageView()
         backgroundImage.image = UIImage(named: "background")
@@ -24,19 +25,14 @@ class ViewController: UIViewController {
         return secondBackground
     }()
 
-    private let loginLabel: UILabel = {
-        let loginLabel = UILabel()
-        loginLabel.text = "Login"
-        loginLabel.textColor = .white
-        loginLabel.font = UIFont(name: "Blinker-SemiBold", size: 24)
-        return loginLabel
-    }()
-
-    private let loginButton = CustomButton(title: "Login", hasBackground: true)
-    private let forgotPassword = CustomButton(title: "Forgot your password?", hasBackground: false)
-
+    private let loginLabel = CustomLabel(text: "Login", tittleType: .big)
     private let emailField = CustomTextField(fieldType: .email)
     private let passwordField = CustomTextField(fieldType: .password)
+    private let loginButton = CustomButton(title: "Login", hasBackground: true)
+    private let forgotPassword = CustomButton(title: "Forgot your password?", hasBackground: false)
+    private let connectWithLAbel = CustomLabel(text: "or connect with", tittleType: .small)
+    private let facebookButton = CustomSocialButton(type: .facebook)
+    private let twitterButton = CustomSocialButton(type: .twitter)
 
     private let signUpButton: UIButton = {
         let signUpButton = UIButton()
@@ -45,7 +41,7 @@ class ViewController: UIViewController {
         signUpButton.titleLabel?.font = UIFont(name: "Blinker-Regular", size: 15)
         return signUpButton
     }()
-    
+
     private let dontHaveAccountLabel: UILabel = {
         let dontHaveAccount = UILabel()
         dontHaveAccount.text = "Don't have account?"
@@ -54,6 +50,7 @@ class ViewController: UIViewController {
         return dontHaveAccount
     }()
 
+//MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -62,7 +59,7 @@ class ViewController: UIViewController {
         setupEmailField()
         setupPasswordField()
     }
-
+//MARK: - Setup Views
     private func setupViews() {
         view.addSubview(loginLabel)
         view.addSubview(emailField)
@@ -75,62 +72,93 @@ class ViewController: UIViewController {
         view.addSubview(forgotPassword)
         view.addSubview(signUpButton)
         view.addSubview(dontHaveAccountLabel)
+        view.addSubview(facebookButton)
+        view.addSubview(twitterButton)
+        view.addSubview(connectWithLAbel)
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         loginLabel.translatesAutoresizingMaskIntoConstraints = false
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
         dontHaveAccountLabel.translatesAutoresizingMaskIntoConstraints = false
+        connectWithLAbel.translatesAutoresizingMaskIntoConstraints = false
     }
-
+//MARK: - Setup Constraints
     private func setupConstraints() {
         backgroundImage.snp.makeConstraints { make in
-            make.height.equalToSuperview().multipliedBy(0.75)
+            make.height.equalToSuperview().multipliedBy(0.67)
         }
 
         secondBackgroundImage.snp.makeConstraints { make in
-            make.bottom.equalTo(backgroundImage.snp.bottom).offset(-16)
+            make.bottom.equalTo(backgroundImage.snp.bottom).offset(-10)
             make.width.equalToSuperview()
         }
         loginLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(170)
+            make.top.equalToSuperview().offset(130)
         }
 
         emailField.snp.makeConstraints { make in
             make.centerX.equalTo(loginLabel)
             make.top.equalTo(loginLabel.snp.bottom).offset(40)
-            make.width.equalToSuperview().multipliedBy(0.85)
+            make.width.equalToSuperview().multipliedBy(0.70)
             make.height.equalTo(55)
         }
 
         passwordField.snp.makeConstraints { make in
             make.centerX.equalTo(emailField)
             make.top.equalTo(emailField.snp.bottom).offset(20)
-            make.width.equalToSuperview().multipliedBy(0.85)
+            make.width.equalTo(emailField.snp.width)
             make.height.equalTo(55)
         }
 
         loginButton.snp.makeConstraints { make in
             make.centerX.equalTo(passwordField)
-            make.top.equalTo(passwordField.snp.bottom).offset(50)
-            make.width.equalToSuperview().multipliedBy(0.85)
-            make.height.equalTo(50)
+            make.top.equalTo(passwordField.snp.bottom).offset(40)
+            make.width.equalTo(emailField.snp.width)
+            make.height.equalTo(40)
         }
 
         forgotPassword.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(30)
+            make.top.equalTo(loginButton.snp.bottom).offset(20)
             make.centerX.equalTo(loginButton)
         }
 
         dontHaveAccountLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(100)
-            make.bottom.equalToSuperview().offset(-50)
+            make.bottom.equalToSuperview().offset(-70)
         }
 
         signUpButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-44)
+            make.bottom.equalToSuperview().offset(-64)
             make.leading.equalTo(dontHaveAccountLabel.snp.trailing).offset(10)
         }
+
+        facebookButton.snp.makeConstraints { make in
+            make.bottom.equalTo(dontHaveAccountLabel.snp.top).offset(-40)
+            make.leading.equalToSuperview().offset(30)
+            make.height.equalTo(37)
+        }
+
+        facebookButton.button.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        twitterButton.snp.makeConstraints { make in
+            make.bottom.equalTo(facebookButton.snp.bottom)
+            make.leading.equalTo(facebookButton.snp.trailing).offset(20)
+            make.trailing.equalToSuperview().offset(-30)
+            make.width.equalTo(facebookButton.snp.width)
+            make.height.equalTo(facebookButton.snp.height)
+        }
+        twitterButton.button.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        connectWithLAbel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(facebookButton.snp.top).offset(-20)
+        }
+
     }
 
     private func setupEmailField() {

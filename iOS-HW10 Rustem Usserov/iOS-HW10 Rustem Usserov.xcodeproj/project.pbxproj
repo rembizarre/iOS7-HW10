@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A59AE1A2B8A3D4F00234CD6 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A59AE192B8A3D4F00234CD6 /* CustomLabel.swift */; };
+		8A59AE1C2B8B334000234CD6 /* CustomSocialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A59AE1B2B8B334000234CD6 /* CustomSocialButton.swift */; };
 		8ABB22502B870216004D2DCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB224F2B870216004D2DCD /* AppDelegate.swift */; };
 		8ABB22522B870216004D2DCD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB22512B870216004D2DCD /* SceneDelegate.swift */; };
 		8ABB22542B870216004D2DCD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB22532B870216004D2DCD /* ViewController.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A59AE192B8A3D4F00234CD6 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		8A59AE1B2B8B334000234CD6 /* CustomSocialButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSocialButton.swift; sourceTree = "<group>"; };
 		8ABB224C2B870216004D2DCD /* iOS-HW10 Rustem Usserov.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-HW10 Rustem Usserov.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ABB224F2B870216004D2DCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8ABB22512B870216004D2DCD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +74,8 @@
 				8ABB22662B88C645004D2DCD /* Fonts */,
 				8ABB22712B88DDC3004D2DCD /* CustomTextField.swift */,
 				8ABB22772B8922E2004D2DCD /* CustomButton.swift */,
+				8A59AE192B8A3D4F00234CD6 /* CustomLabel.swift */,
+				8A59AE1B2B8B334000234CD6 /* CustomSocialButton.swift */,
 			);
 			path = "iOS-HW10 Rustem Usserov";
 			sourceTree = "<group>";
@@ -161,6 +167,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8ABB22722B88DDC3004D2DCD /* CustomTextField.swift in Sources */,
+				8A59AE1C2B8B334000234CD6 /* CustomSocialButton.swift in Sources */,
+				8A59AE1A2B8A3D4F00234CD6 /* CustomLabel.swift in Sources */,
 				8ABB22542B870216004D2DCD /* ViewController.swift in Sources */,
 				8ABB22502B870216004D2DCD /* AppDelegate.swift in Sources */,
 				8ABB22522B870216004D2DCD /* SceneDelegate.swift in Sources */,

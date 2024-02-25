@@ -50,7 +50,7 @@ class CustomTextField: UITextField {
         }
     }
 }
-
+//extension to add left & right icon
 extension UITextField {
     func setLeftIcon(_ image: UIImage) {
         let iconView = UIImageView(frame: CGRect(x: 50, y: 5, width: 20, height: 20))

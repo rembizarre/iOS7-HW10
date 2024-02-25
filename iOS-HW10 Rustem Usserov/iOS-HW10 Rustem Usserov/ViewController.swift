@@ -31,53 +31,8 @@ class ViewController: UIViewController {
     private let loginButton = CustomButton(title: "Login", hasBackground: true)
     private let forgotPassword = CustomButton(title: "Forgot your password?", hasBackground: false)
     private let connectWithLAbel = CustomLabel(text: "or connect with", tittleType: .small)
-
-    private let facebookButton: UIButton = {
-        var buttonConfig = UIButton.Configuration.filled()
-        buttonConfig.baseForegroundColor = .white
-        buttonConfig.baseBackgroundColor = UIColor(red: 52/255, green: 156/255, blue: 239/255, alpha: 1)
-        buttonConfig.image = UIImage(named: "fblogo")
-        buttonConfig.imagePadding = 15
-        buttonConfig.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -10, bottom: 0, trailing: 10)
-        buttonConfig.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer{ incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont(name: "Blinker-Regular", size: 14)
-            return outgoing
-        }
-
-        let facebookButton = UIButton(configuration: buttonConfig, primaryAction: nil)
-        facebookButton.setTitle("Facebook", for: .normal)
-
-        facebookButton.layer.cornerRadius = 17
-        facebookButton.clipsToBounds = true
-        return facebookButton
-    }()
-
-    private let twitterButton: UIButton = {
-        var buttonConfig = UIButton.Configuration.filled()
-        buttonConfig.baseForegroundColor = .white
-        buttonConfig.baseBackgroundColor = UIColor(red: 80/255, green: 115/255, blue: 181/255, alpha: 1)
-        buttonConfig.image = UIImage(named: "xlogo")
-        buttonConfig.imagePadding = 20
-        buttonConfig.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -25, bottom: 0, trailing: 10)
-        buttonConfig.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer{ incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont(name: "Blinker-Regular", size: 14)
-            return outgoing
-        }
-
-        let twitterButton = UIButton(configuration: buttonConfig, primaryAction: nil)
-        twitterButton.setTitle("Twitter", for: .normal)
-        twitterButton.clipsToBounds = true
-        twitterButton.layer.cornerRadius = 17
-        twitterButton.layer.shadowColor = UIColor.black.cgColor
-        twitterButton.layer.shadowOpacity = 0.3
-        twitterButton.layer.shadowOffset = .zero
-        twitterButton.layer.shadowRadius = 10
-        twitterButton.layer.shouldRasterize = true
-        twitterButton.layer.rasterizationScale = UIScreen.main.scale
-        return twitterButton
-    }()
+    private let facebookButton = CustomSocialButton(type: .facebook)
+    private let twitterButton = CustomSocialButton(type: .twitter)
 
     private let signUpButton: UIButton = {
         let signUpButton = UIButton()
@@ -125,8 +80,6 @@ class ViewController: UIViewController {
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
         dontHaveAccountLabel.translatesAutoresizingMaskIntoConstraints = false
-        facebookButton.translatesAutoresizingMaskIntoConstraints = false
-        twitterButton.translatesAutoresizingMaskIntoConstraints = false
         connectWithLAbel.translatesAutoresizingMaskIntoConstraints = false
     }
 //MARK: - Setup Constraints
@@ -186,12 +139,19 @@ class ViewController: UIViewController {
             make.height.equalTo(37)
         }
 
+        facebookButton.button.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
         twitterButton.snp.makeConstraints { make in
             make.bottom.equalTo(facebookButton.snp.bottom)
             make.leading.equalTo(facebookButton.snp.trailing).offset(20)
             make.trailing.equalToSuperview().offset(-30)
             make.width.equalTo(facebookButton.snp.width)
             make.height.equalTo(facebookButton.snp.height)
+        }
+        twitterButton.button.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
 
         connectWithLAbel.snp.makeConstraints { make in
